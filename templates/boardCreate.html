@@ -15,43 +15,71 @@
     <style>
         .myboard {
             width: 95%;
-            max-width: 500px;
+            max-width: 1000px;
             margin: 20px auto 0px auto;
             padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
-
-            display: none;
+            box-shadow: 0px 0px 1px 0px gray;
         }
-
     </style>
     <script>
-
+        function save_post() {
+            let nickname = $('#nickName').val()
+            let password = $('#post_password').val()
+            let post_title = $('#post_title').val()
+            let contents = $('#contents').val()
+            let category = $('#category').val()
+            let post_num
+            $.ajax({
+                type: 'POST',
+                url: '/toyproject',
+                data: {nickname_give:nickname,
+                    post_password_give:password,
+                    post_title_give: post_title,
+                    contents_give: contents,
+                    category_give: category},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
+        }
     </script>
 </head>
 <body>
-<div>
-    <nav class="navbar bg-body-tertiary">
-        <form class="container-fluid justify-content-end">
-            <button class="btn btn-outline-success me-2" type="button">Main button</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
-        </form>
-    </nav>
-</div>
-
 <div class="myboard">
     <div class="card">
         <div class="card-body">
             <div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                           placeholder="name@example.com">
+                    <div style="margin-bottom: 20px; width: 200px;">
+                        <select class="form-select form-select-sm" aria-label=".form-select-lg sm" id="category">
+                            <option selected>카테고리</option>
+                            <option value="직장인">직장인</option>
+                            <option value="취준생">취준생</option>
+                            <option value="구경꾼">구경꾼</option>
+                        </select>
+                    </div>
+                    <div class="row-2" style="margin-bottom: 20px;">
+                        <div>
+                        닉네임: <input type="email" id="nickName" style="margin-right: 20px; width: 150px;">
+                        비밀번호: <input type="email" id="post_password">
+                        </div>
+                    </div>
+                    <label for="post_title" class="form-label">제목</label>
+                    <input type="email" class="form-control" id="post_title">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <label for="contents" class="form-label">내용</label>
+                    <textarea
+                            class="form-control"
+                            id="contents"
+                            placeholder="내용을 입력해주세요."
+                            style="height: 300px;">
+                    </textarea>
                 </div>
             </div>
+            <button class="btn btn-outline-success me-2" type="button" onclick="save_post()">완료</button>
+            <button class="btn btn-outline-success me-2" type="button">나가기</button>
         </div>
     </div>
 </div>
