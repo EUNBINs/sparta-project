@@ -9,18 +9,27 @@ db = client.dbsparta
 def home():
    return render_template('boardCreate.html')
 
-@app.route("/homework", methods=["POST"])
-def homework_post():
-    name_receive = request.form['name_give']
-    comment_receive = request.form['comment_give']
+@app.route("/toyproject", methods=["POST"])
+# 제목, 내용, 닉네임, 비밀번호
+def toyproject_post():
+    nick_name_receive = request.form['nickname_give']
+    post_password_receive = request.form['post_password_give']
+    post_title_receive = request.form['post_title_give']
+    contents_receive = request.form['contents_give']
+    category_receive = request.form['category_give']
+    post_num_receive = request.form['post_num_give']
 
     doc = {
-        'name': name_receive,
-        'comment': comment_receive
+        'nick_name': nick_name_receive,
+        'post_paswword': post_password_receive,
+        'post_title': post_title_receive,
+        'contents': contents_receive,
+        'category': category_receive,
+        'post_num': post_num_receive
     }
-    db.homework.insert_one(doc)
+    db.toyproject.insert_one(doc)
 
-    return jsonify({'msg':'응원 완료!'})
+    return jsonify({'msg':'게시물 등록이 완료되었습니다'})
 
 @app.route("/homework", methods=["GET"])
 def homework_get():
