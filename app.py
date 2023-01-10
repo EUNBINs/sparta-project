@@ -9,6 +9,15 @@ db = client.dbsparta
 def home():
    return render_template('boardCreate.html')
 
+@app.route('/mainHome')
+def mainHome():
+   return render_template('mainHome.html')
+
+@app.route('/board')
+def board():
+   return render_template('board.html')
+
+
 @app.route("/toyproject", methods=["POST"])
 # 제목, 내용, 닉네임, 비밀번호
 def toyproject_post():
@@ -30,11 +39,10 @@ def toyproject_post():
     db.toyproject.insert_one(doc)
 
     return jsonify({'msg':'게시물 등록이 완료되었습니다'})
-
-@app.route("/homework", methods=["GET"])
-def homework_get():
-    comment_list = list(db.homework.find({},{'_id':False}))
-    return jsonify({'comments':comment_list})
+@app.route("/toyproject", methods=["GET"])
+def toyproject_get():
+    toyproject_list = list(db.toyproject.find({}, {'_id': False}))
+    return jsonify({'toyproject':toyproject_list})
 
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=8000, debug=True)
+   app.run('0.0.0.0', port=5000, debug=True)
