@@ -39,9 +39,12 @@
                     category_give: category},
                 success: function (response) {
                     alert(response['msg'])
-                    window.location.reload()
+                    window.location.href="/board"
                 }
             })
+        }
+        function exitPost() {
+            location.href='/'
         }
     </script>
 </head>
@@ -79,7 +82,7 @@
                 </div>
             </div>
             <button class="btn btn-outline-success me-2" type="button" onclick="save_post()">완료</button>
-            <button class="btn btn-outline-success me-2" type="button">나가기</button>
+            <button class="btn btn-outline-success me-2" type="button" onclick="exitPost()">나가기</button>
         </div>
     </div>
 </div>

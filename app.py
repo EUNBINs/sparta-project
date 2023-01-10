@@ -9,13 +9,17 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.igj8fho.mongodb.net/cluster0?retryWrites=true&w=majority',  tlsCAFile=ca)
 db = client.dbsparta
 
-@app.route('/posting')
-def posting():
-    return render_template('boardCreate.html')
-
 @app.route('/')
-def main():
-    return render_template('메인화면.html')
+def home():
+   return render_template('메인화면.html')
+
+@app.route('/posting')
+def mainHome():
+   return render_template('boardCreate.html')
+
+@app.route('/board')
+def board():
+   return render_template('board.html')
 
 
 @app.route("/toyproject", methods=["POST"])
@@ -37,7 +41,7 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
         'post_num': post_num
     }
     db.toyproject.insert_one(doc)
-    return jsonify({'msg':'저장되었습니다.'})
+    return jsonify({'msg':'게시물 등록이 완료되었습니다.'})
 
 @app.route("/toyproject", methods=["GET"])
 def toyproject_get():
@@ -46,3 +50,8 @@ def toyproject_get():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
+
+
+
+
