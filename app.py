@@ -9,9 +9,13 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.igj8fho.mongodb.net/cluster0?retryWrites=true&w=majority',  tlsCAFile=ca)
 db = client.dbsparta
 
+@app.route('/posting')
+def posting():
+    return render_template('boardCreate.html')
+
 @app.route('/')
-def home():
-    return render_template('postingeunbin.html')
+def main():
+    return render_template('메인화면.html')
 
 
 @app.route("/toyproject", methods=["POST"])
