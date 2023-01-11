@@ -7,7 +7,7 @@ db = client.dbsparta
 
 @app.route('/')
 def home():
-    return render_template('index2.html')
+    return render_template('Board.html')
 
 
 @app.route("/toyproject", methods=["POST"])
