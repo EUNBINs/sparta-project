@@ -28,8 +28,7 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
     contents_receive = request.form['contents_give']
     nickname_receive = request.form['nickname_give']
     password_receive = request.form['post_password_give']
-    category_receive = request.form['category_give']
-    #post_num_receive = request.form['post_num_give']
+
     postingnumber = list(db.toyproject.find({}, {'_id': False}))
     post_num = len(postingnumber) + 1
     doc = {
@@ -37,8 +36,7 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
         'contents' : contents_receive,
         'nickname': nickname_receive,
         'password': password_receive,
-        'category': category_receive,
-        'post_num': post_num
+        'post_num': post_num,
     }
     db.toyproject.insert_one(doc)
     return jsonify({'msg':'게시물 등록이 완료되었습니다.'})
@@ -47,6 +45,12 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
 def toyproject_get():
     toyproject_list = list(db.toyproject.find({}, {'_id': False}))
     return jsonify({'toyproject':toyproject_list})
+
+@app.route("/toyproject", methods=["DELETE"])
+def toyproject_delete():
+    post_num_receive = request.form['post_num_give']
+    db.toyproject.delete_one({'post_num': int(post_num_receive)})
+    return jsonify({'msg':'삭제되었습니다!'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
