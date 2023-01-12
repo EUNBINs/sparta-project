@@ -36,14 +36,12 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
         #max(1,3) = 3
         #괄호 안의 숫자들 중 가장 큰 수를 구하는 함수
     post_num = mx + 1 #이부분이 없으면 마지막 post_num과 같은 숫자가 되기 때문에 1을 더해주어야함
-
     doc = {
         'title' : title_receive,
         'contents' : contents_receive,
         'nickname': nickname_receive,
         'password': password_receive,
-        'category': category_receive,
-        'post_num': post_num
+        'post_num': post_num,
     }
     db.toyproject.insert_one(doc)
     return jsonify({'msg':'게시물 등록이 완료되었습니다.'})
@@ -54,6 +52,7 @@ def toyproject_get():
     return jsonify({'toyproject':toyproject_list})
 
 @app.route("/toyproject", methods=["DELETE"])
+
 def toyproject_get():
     post_num_receive = request.form['post_num_give']
     db.toyproject.delete.one({'post_num': int(post_num_receive)})
