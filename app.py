@@ -30,8 +30,13 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
     password_receive = request.form['post_password_give']
     category_receive = request.form['category_give']
     #post_num_receive = request.form['post_num_give']
-    postingnumber = list(db.toyproject.find({}, {'_id': False}))
-    post_num = len(postingnumber) + 1
+    toyproject_list = list(db.toyproject.find({}, {'_id': False}))
+    mx = 0 # mx라는 변수를 만들고 0으로 초기화 함(이름은 임의로 지정함) (초기화하지 않는경우 에러발생)
+    for user in toyproject_list:
+        mx = max(mx, user['post_num'])#max(a,b) 함수를 사용하여 반복문동안 mx와 [post_num]중 큰 숫자를 다시 mx에 넣음
+        #max(1,3) = 3
+        #괄호 안의 숫자들 중 가장 큰 수를 구하는 함수
+    post_num = mx + 1 #이부분이 없으면 마지막 post_num과 같은 숫자가 되기 때문에 1을 더해주어야함
     doc = {
         'title' : title_receive,
         'contents' : contents_receive,
