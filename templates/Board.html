@@ -49,9 +49,6 @@
         .contents {
             text-align: center;
         }
-        .number {
-            counter-reset: item 0;
-        }
     </style>
     <script>
         $(document).ready(function () {
@@ -72,7 +69,7 @@
                         let post_num = data[i]['post_num']
 
                         let temp_html = `<tr class="text-center">
-                                            <th scope="row"></th>
+                                            <th scope="row">${post_num}</th>
                                             <td>${nick_name}</td>
                                             <td>${post_title}</td>
                                             <td>${contents}</td>
