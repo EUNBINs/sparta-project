@@ -52,10 +52,9 @@ def toyproject_get():
     return jsonify({'toyproject':toyproject_list})
 
 @app.route("/toyproject", methods=["DELETE"])
-
-def toyproject_get():
+def toyproject_del():
     post_num_receive = request.form['post_num_give']
-    db.toyproject.delete.one({'post_num': int(post_num_receive)})
+    db.toyproject.delete_one({'post_num': int(post_num_receive)})
     return jsonify({'msg':'삭제 완료'})
 
 if __name__ == '__main__':
