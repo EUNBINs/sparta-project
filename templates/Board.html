@@ -58,12 +58,23 @@
 
                         let temp_html = `<tr class="text-center">
                                             <th scope="row">${post_num}</th>
-                                            <td>${contents}</td>
                                             <td>${nick_name}</td>
                                             <td>${post_title}</td>
+                                            <td>${contents}</td>
+                                            <input type="botton" onclick="post_del(${post_num}") value="삭제">
                                         </tr>`
                         $('#table_data').append(temp_html)
                     }
+                }
+            });
+        }
+        function post_del(number) {
+            $.ajax({
+                type: 'POST',
+                url: '/toyproject/del',
+                data: {postnum_give: number},
+                success: function (response) {
+                    window.location.reload()
                 }
             });
         }
@@ -79,14 +90,16 @@
             <col width="10%"/>
             <col width="20%"/>
             <col width="30%"/>
-            <col width="40%"/>
+            <col width="30%"/>
+            <col width="10%"/>
         </colgroup>
         <thead>
         <tr>
             <th scope="col">번호</th>
-            <th scope="col">내용</th>
             <th scope="col">닉네임</th>
             <th scope="col">제목</th>
+            <th scope="col">내용</th>
+            <th scope="col">삭제</th>
         </tr>
         </thead>
         <tbody id="table_data">

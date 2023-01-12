@@ -31,6 +31,13 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
     db.toyproject.insert_one(doc)
     return jsonify({'msg':'저장되었습니다.'})
 
+@app.route("/toyproject", methods=["POST"])
+def toyproject_del():
+    postnum_receive = request.form['post_num_give']
+
+    db.toyproject.delete({'post_num': int(postnum_receive)})
+
+
 @app.route("/toyproject", methods=["GET"])
 def toyproject_get():
     post_list = list(db.toyproject.find({},{'_id':False}))
