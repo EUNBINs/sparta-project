@@ -53,53 +53,43 @@
                     for (let i = 0; i < data.length; i++) {
                         let nick_name = data[i]['nickname']
                         let post_title = data[i]['title']
-                        let contents = data[i]['contents']
+                        let category = data[i]['category']
                         let post_num = data[i]['post_num']
 
                         let temp_html = `<tr class="text-center">
                                             <th scope="row">${post_num}</th>
+                                            <td>${category}</td>
                                             <td>${nick_name}</td>
                                             <td>${post_title}</td>
-                                            <td>${contents}</td>
-                                            <input type="botton" onclick="post_del(${post_num}") value="삭제">
                                         </tr>`
                         $('#table_data').append(temp_html)
                     }
                 }
             });
         }
-        function post_del(number) {
-            $.ajax({
-                type: 'POST',
-                url: '/toyproject/del',
-                data: {postnum_give: number},
-                success: function (response) {
-                    window.location.reload()
-                }
-            });
+        function createPost() {
+            location.href='/posting'
         }
     </script>
 </head>
 <body>
 <div class="tableset">
     <div class="createButton" style="display: table">
-        <button class="btn btn-outline-success me-2" type="button" onclick="window.location.href='/boardCreate'">글쓰기</button>
+        <button class="btn btn-outline-success me-2" type="button" onclick="createPost()">글쓰기</button>
     </div>
     <table class="table board">
         <colgroup>
             <col width="10%"/>
             <col width="20%"/>
             <col width="30%"/>
-            <col width="30%"/>
-            <col width="10%"/>
+            <col width="40%"/>
         </colgroup>
         <thead>
         <tr>
             <th scope="col">번호</th>
+            <th scope="col">카테고리</th>
             <th scope="col">닉네임</th>
             <th scope="col">제목</th>
-            <th scope="col">내용</th>
-            <th scope="col">삭제</th>
         </tr>
         </thead>
         <tbody id="table_data">
