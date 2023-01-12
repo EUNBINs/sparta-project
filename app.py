@@ -34,7 +34,7 @@ def toyproject_post(): #제목, 내용, 닉네임, 비밀번호
 @app.route("/toyproject", methods=["GET"])
 def toyproject_get():
     post_list = list(db.toyproject.find({},{'_id':False}))
-    return jsonify({'post_list': post_list})
+    return jsonify({'toyproject': post_list})
 
 @app.route('/Board')
 def Board():

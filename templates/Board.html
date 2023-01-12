@@ -51,14 +51,14 @@
                 success: function (response) {
                     let data = response['toyproject']
                     for (let i = 0; i < data.length; i++) {
-                        let nick_name = data[i]['nick_name']
-                        let post_title = data[i]['post_title']
-                        let category = data[i]['categoty']
+                        let nick_name = data[i]['nickname']
+                        let post_title = data[i]['title']
+                        let contents = data[i]['contents']
                         let post_num = data[i]['post_num']
 
                         let temp_html = `<tr class="text-center">
                                             <th scope="row">${post_num}</th>
-                                            <td>${category}</td>
+                                            <td>${contents}</td>
                                             <td>${nick_name}</td>
                                             <td>${post_title}</td>
                                         </tr>`
@@ -87,7 +87,7 @@
         <thead>
         <tr>
             <th scope="col">번호</th>
-            <th scope="col">카테고리</th>
+            <th scope="col">내용</th>
             <th scope="col">닉네임</th>
             <th scope="col">제목</th>
         </tr>
